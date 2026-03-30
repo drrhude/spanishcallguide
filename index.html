@@ -3,589 +3,119 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CVC Spine & Sport · Guía de Llamadas</title>
+<title>CVC Spine & Sport · Call Guide</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --sage: #6B8C6E;
-    --sage-light: #8FAF92;
-    --sage-pale: #EEF4EF;
-    --sage-dark: #4A6B4D;
-    --gold: #C9A84C;
-    --gold-light: #F0D990;
-    --black: #1A1A1A;
-    --white: #FAFAF8;
-    --gray: #6B7280;
-    --gray-light: #F3F4F6;
-    --red: #B85C5C;
-    --red-light: #FDF2F2;
-    --blue: #4A7B9D;
-    --blue-light: #EEF4F9;
-    --shadow: 0 4px 24px rgba(0,0,0,0.08);
-    --shadow-lg: 0 8px 40px rgba(0,0,0,0.12);
+    --sage:#6B8C6E;--sage-light:#8FAF92;--sage-pale:#EEF4EF;--sage-dark:#4A6B4D;
+    --gold:#C9A84C;--gold-light:#F0D990;--black:#1A1A1A;--white:#FAFAF8;
+    --gray:#6B7280;--gray-light:#F3F4F6;--red:#B85C5C;--red-light:#FDF2F2;
+    --blue:#4A7B9D;--blue-light:#EEF4F9;
+    --shadow:0 4px 24px rgba(0,0,0,0.08);--shadow-lg:0 8px 40px rgba(0,0,0,0.12);
   }
-
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--white);
-    color: var(--black);
-    min-height: 100vh;
-  }
-
-  /* HEADER */
-  .header {
-    background: var(--black);
-    color: var(--white);
-    padding: 20px 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    border-bottom: 2px solid var(--gold);
-  }
-
-  .header-left h1 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 18px;
-    letter-spacing: 0.01em;
-    color: var(--white);
-  }
-
-  .header-left p {
-    font-size: 11px;
-    color: var(--gold);
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    margin-top: 2px;
-  }
-
-  .step-indicator {
-    display: flex;
-    gap: 6px;
-    align-items: center;
-  }
-
-  .dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #444;
-    transition: all 0.3s;
-  }
-
-  .dot.active { background: var(--gold); transform: scale(1.3); }
-  .dot.done { background: var(--sage-light); }
-
-  /* MAIN */
-  main {
-    max-width: 100%;
-    margin: 0;
-    padding: 24px 32px 80px;
-  }
-
-  /* PHASE BADGE */
-  .phase-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 5px 14px;
-    border-radius: 999px;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 12px;
-  }
-
-  .phase-badge.connect { background: var(--blue-light); color: var(--blue); }
-  .phase-badge.control { background: var(--sage-pale); color: var(--sage-dark); }
-  .phase-badge.position { background: #FEF9EE; color: #8B6914; }
-  .phase-badge.close { background: #F0FFF4; color: #2D6A4F; }
-  .phase-badge.objection { background: var(--red-light); color: var(--red); }
-
-  .phase-dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: currentColor;
-  }
-
-  /* CARD */
-  .card {
-    background: var(--white);
-    border: 1.5px solid #E5E7EB;
-    border-radius: 16px;
-    padding: 28px 36px;
-    margin-bottom: 16px;
-    box-shadow: var(--shadow);
-    transition: all 0.3s ease;
-    width: 100%;
-  }
-
-  .card.active-card {
-    border-color: var(--sage);
-    box-shadow: 0 0 0 3px rgba(107,140,110,0.1), var(--shadow-lg);
-  }
-
-  .card.dimmed {
-    opacity: 0.45;
-    pointer-events: none;
-  }
-
-  .card h2 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 22px;
-    color: var(--black);
-    margin-bottom: 4px;
-    line-height: 1.2;
-  }
-
-  .card .subtitle {
-    font-size: 12px;
-    color: var(--gray);
-    font-weight: 500;
-    margin-bottom: 16px;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-  }
-
-  /* SCRIPT BOX */
-  .script-box {
-    background: var(--sage-pale);
-    border-left: 3px solid var(--sage);
-    border-radius: 0 10px 10px 0;
-    padding: 14px 20px;
-    margin: 14px 0;
-    position: relative;
-    width: 100%;
-  }
-
-  .script-box::before {
-    content: 'DI ESTO';
-    position: absolute;
-    top: -8px;
-    left: 14px;
-    background: var(--sage);
-    color: white;
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    padding: 2px 8px;
-    border-radius: 999px;
-  }
-
-  .script-box p {
-    font-size: 14px;
-    line-height: 1.65;
-    color: var(--black);
-    font-style: italic;
-  }
-
-  .script-box .alt {
-    font-size: 12px;
-    color: var(--sage-dark);
-    margin-top: 10px;
-    font-style: normal;
-    font-weight: 500;
-  }
-
-  /* TIP BOX */
-  .tip-box {
-    background: #FFFBEB;
-    border: 1px solid #F0D990;
-    border-radius: 10px;
-    padding: 12px 14px;
-    margin: 12px 0;
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
-  }
-
-  .tip-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
-
-  .tip-box p {
-    font-size: 12px;
-    color: #7A5C14;
-    line-height: 1.5;
-  }
-
-  .tip-box strong { color: #5A3C0A; }
-
-  /* QUESTIONS LIST */
-  .question-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin: 12px 0;
-  }
-
-  .question-list li {
-    background: var(--white);
-    border: 1.5px solid #E5E7EB;
-    border-radius: 10px;
-    padding: 12px 14px;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
-  .question-list li:hover {
-    border-color: var(--sage);
-    background: var(--sage-pale);
-  }
-
-  .q-num {
-    width: 22px; height: 22px;
-    background: var(--black);
-    color: white;
-    border-radius: 50%;
-    font-size: 11px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  /* BRANCH BUTTONS */
-  .branches {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 16px;
-  }
-
-  .branch-btn {
-    padding: 14px 18px;
-    border-radius: 12px;
-    border: 2px solid;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    text-align: left;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    transition: all 0.2s;
-  }
-
-  .branch-btn:hover { transform: translateY(-1px); }
-
-  .branch-btn .arrow { font-size: 16px; }
-
-  .branch-btn.go { 
-    background: var(--sage-pale); 
-    border-color: var(--sage);
-    color: var(--sage-dark);
-  }
-
-  .branch-btn.go:hover { background: var(--sage); color: white; }
-
-  .branch-btn.close-btn { 
-    background: #F0FFF4; 
-    border-color: #2D6A4F;
-    color: #2D6A4F;
-  }
-
-  .branch-btn.close-btn:hover { background: #2D6A4F; color: white; }
-
-  .branch-btn.objection-btn {
-    background: var(--red-light);
-    border-color: var(--red);
-    color: var(--red);
-  }
-
-  .branch-btn.objection-btn:hover { background: var(--red); color: white; }
-
-  .branch-btn.exit-btn {
-    background: var(--gray-light);
-    border-color: #D1D5DB;
-    color: var(--gray);
-  }
-
-  /* OBJECTION PANEL */
-  .objection-panel {
-    display: none;
-    border: 2px solid var(--red);
-    border-radius: 12px;
-    overflow: hidden;
-    margin-top: 12px;
-    width: 100%;
-  }
-
-  .objection-panel.open { display: block; }
-
-  .objection-header {
-    background: var(--red);
-    color: white;
-    padding: 10px 16px;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-  }
-
-  .objection-body { padding: 16px; background: var(--red-light); }
-
-  .objection-body .script-box {
-    background: #FDECEA;
-    border-color: var(--red);
-  }
-
-  .objection-body .script-box::before {
-    background: var(--red);
-  }
-
-  /* OBJECTION GRID */
-  .obj-tabs {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 8px;
-    margin-bottom: 14px;
-  }
-
-  .obj-tab {
-    padding: 10px 12px;
-    border-radius: 8px;
-    border: 1.5px solid #E5A0A0;
-    background: white;
-    color: var(--red);
-    font-size: 12px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-    text-align: center;
-  }
-
-  .obj-tab.selected, .obj-tab:hover {
-    background: var(--red);
-    color: white;
-    border-color: var(--red);
-  }
-
-  .obj-answer { display: none; }
-  .obj-answer.visible { display: block; }
-
-  /* DIVIDER */
-  .divider {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin: 20px 0;
-    color: var(--gray);
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-  }
-
-  .divider::before, .divider::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: #E5E7EB;
-  }
-
-  /* CLOSE CARD */
-  .close-card {
-    background: linear-gradient(135deg, #1A1A1A 0%, #2D4A30 100%);
-    color: white;
-    border: none;
-  }
-
-  .close-card h2 { color: white; }
-  .close-card .subtitle { color: var(--gold); }
-
-  .close-card .script-box {
-    background: rgba(255,255,255,0.08);
-    border-left-color: var(--gold);
-  }
-
-  .close-card .script-box::before {
-    background: var(--gold);
-    color: var(--black);
-  }
-
-  .close-card .script-box p { color: rgba(255,255,255,0.92); }
-
-  .alt-close {
-    font-size: 12px;
-    color: var(--gold-light);
-    margin-top: 10px;
-  }
-
-  .book-options {
-    display: flex;
-    gap: 10px;
-    margin-top: 16px;
-  }
-
-  .book-option {
-    flex: 1;
-    background: rgba(255,255,255,0.1);
-    border: 1.5px solid rgba(255,255,255,0.2);
-    border-radius: 10px;
-    padding: 12px;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
-  .book-option:hover { background: var(--gold); border-color: var(--gold); }
-  .book-option:hover .bo-label { color: var(--black); }
-  .book-option:hover .bo-icon { filter: grayscale(0); }
-
-  .bo-icon { font-size: 22px; display: block; margin-bottom: 4px; }
-  .bo-label { font-size: 12px; color: rgba(255,255,255,0.8); font-weight: 500; }
-
-  /* REMINDER STRIP */
-  .reminder-strip {
-    background: var(--gold);
-    border-radius: 12px;
-    padding: 14px 18px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin: 20px 0;
-  }
-
-  .reminder-strip .r-icon { font-size: 28px; flex-shrink: 0; }
-
-  .reminder-strip p {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--black);
-    line-height: 1.4;
-  }
-
-  /* NOT A CANDIDATE */
-  .exit-card {
-    background: var(--gray-light);
-    border-color: #D1D5DB;
-  }
-
-  .exit-card .script-box {
-    background: white;
-    border-color: #9CA3AF;
-  }
-
-  .exit-card .script-box::before { background: #6B7280; }
-
-  /* TRACKING */
-  .tracking-strip {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
-    margin: 20px 0;
-  }
-
-  .track-item {
-    background: var(--sage-pale);
-    border-radius: 10px;
-    padding: 12px 8px;
-    text-align: center;
-  }
-
-  .track-item .ti-num {
-    font-family: 'DM Serif Display', serif;
-    font-size: 26px;
-    color: var(--sage-dark);
-    line-height: 1;
-  }
-
-  .track-item .ti-label {
-    font-size: 10px;
-    color: var(--sage-dark);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    margin-top: 4px;
-  }
-
-  /* FLOATING NAV */
-  .float-nav {
-    position: fixed;
-    bottom: 0;
-    left: 0; right: 0;
-    background: rgba(26,26,26,0.95);
-    backdrop-filter: blur(10px);
-    padding: 12px 20px 20px;
-    display: flex;
-    gap: 10px;
-    border-top: 1px solid #333;
-  }
-
-  .nav-btn {
-    flex: 1;
-    padding: 12px;
-    border-radius: 10px;
-    border: none;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
-  .nav-btn.prev { background: #333; color: #999; }
-  .nav-btn.next { background: var(--sage); color: white; }
-  .nav-btn.prev:hover { background: #444; color: white; }
-  .nav-btn.next:hover { background: var(--sage-dark); }
-  .nav-btn:disabled { opacity: 0.3; cursor: default; }
-
-  .obj-quick-btn {
-    background: var(--red);
-    color: white;
-    padding: 12px 16px;
-    border-radius: 10px;
-    border: none;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 12px;
-    font-weight: 700;
-    cursor: pointer;
-    white-space: nowrap;
-  }
-
-  /* STEP NUMBER */
-  .step-num {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px; height: 32px;
-    background: var(--black);
-    color: white;
-    border-radius: 50%;
-    font-weight: 700;
-    font-size: 14px;
-    margin-bottom: 12px;
-  }
-
-  .close-card .step-num { background: var(--gold); color: var(--black); }
-
-  /* SECTION LABELS */
-  .section-label {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--gray);
-    margin: 24px 0 10px;
-  }
-
-  @media (max-width: 768px) {
-    main { padding: 16px 16px 80px; }
-    .card { padding: 18px 16px; }
-    .obj-tabs { grid-template-columns: 1fr 1fr; }
-    .book-options { flex-direction: column; }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--black);min-height:100vh;}
+
+  .header{background:var(--black);color:var(--white);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;border-bottom:2px solid var(--gold);}
+  .header-left h1{font-family:'DM Serif Display',serif;font-size:18px;color:var(--white);}
+  .header-left p{font-size:11px;color:var(--gold);font-weight:500;letter-spacing:0.08em;text-transform:uppercase;margin-top:2px;}
+  .header-right{display:flex;align-items:center;gap:14px;}
+
+  .lang-toggle{display:flex;background:#2A2A2A;border-radius:999px;padding:3px;gap:2px;}
+  .lang-btn{padding:6px 16px;border-radius:999px;border:none;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all 0.2s;letter-spacing:0.05em;background:transparent;color:#888;}
+  .lang-btn.active{background:var(--gold);color:var(--black);}
+
+  .step-indicator{display:flex;gap:6px;align-items:center;}
+  .dot{width:8px;height:8px;border-radius:50%;background:#444;transition:all 0.3s;}
+  .dot.active{background:var(--gold);transform:scale(1.3);}
+  .dot.done{background:var(--sage-light);}
+
+  main{max-width:100%;margin:0;padding:24px 32px 80px;}
+
+  .phase-badge{display:inline-flex;align-items:center;gap:8px;padding:5px 14px;border-radius:999px;font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:12px;}
+  .phase-badge.connect{background:var(--blue-light);color:var(--blue);}
+  .phase-badge.control{background:var(--sage-pale);color:var(--sage-dark);}
+  .phase-badge.position{background:#FEF9EE;color:#8B6914;}
+  .phase-badge.close{background:#F0FFF4;color:#2D6A4F;}
+  .phase-badge.objection{background:var(--red-light);color:var(--red);}
+  .phase-dot{width:6px;height:6px;border-radius:50%;background:currentColor;}
+
+  .card{background:var(--white);border:1.5px solid #E5E7EB;border-radius:16px;padding:28px 36px;margin-bottom:16px;box-shadow:var(--shadow);transition:all 0.3s ease;width:100%;}
+  .card.active-card{border-color:var(--sage);box-shadow:0 0 0 3px rgba(107,140,110,0.1),var(--shadow-lg);}
+  .card h2{font-family:'DM Serif Display',serif;font-size:22px;color:var(--black);margin-bottom:4px;line-height:1.2;}
+  .card .subtitle{font-size:12px;color:var(--gray);font-weight:500;margin-bottom:16px;text-transform:uppercase;letter-spacing:0.06em;}
+
+  .script-box{background:var(--sage-pale);border-left:3px solid var(--sage);border-radius:0 10px 10px 0;padding:20px 20px 14px;margin:14px 0;position:relative;width:100%;}
+  .script-box::before{content:attr(data-label);position:absolute;top:-8px;left:14px;background:var(--sage);color:white;font-size:9px;font-weight:700;letter-spacing:0.1em;padding:2px 8px;border-radius:999px;}
+  .script-box p{font-size:14px;line-height:1.65;color:var(--black);font-style:italic;}
+  .script-box .alt{font-size:12px;color:var(--sage-dark);margin-top:10px;font-style:normal;font-weight:500;}
+
+  .tip-box{background:#FFFBEB;border:1px solid #F0D990;border-radius:10px;padding:12px 14px;margin:12px 0;display:flex;gap:10px;align-items:flex-start;}
+  .tip-icon{font-size:16px;flex-shrink:0;margin-top:1px;}
+  .tip-box p{font-size:12px;color:#7A5C14;line-height:1.5;}
+  .tip-box strong{color:#5A3C0A;}
+
+  .question-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin:12px 0;}
+  .question-list li{background:var(--white);border:1.5px solid #E5E7EB;border-radius:10px;padding:12px 14px;font-size:14px;display:flex;align-items:center;gap:10px;transition:all 0.2s;}
+  .question-list li:hover{border-color:var(--sage);background:var(--sage-pale);}
+  .q-num{width:22px;height:22px;background:var(--black);color:white;border-radius:50%;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+
+  .obj-tabs{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:14px;}
+  .obj-tab{padding:10px 12px;border-radius:8px;border:1.5px solid #E5A0A0;background:white;color:var(--red);font-size:12px;font-weight:600;cursor:pointer;transition:all 0.2s;text-align:center;}
+  .obj-tab.selected,.obj-tab:hover{background:var(--red);color:white;border-color:var(--red);}
+  .obj-answer{display:none;}
+  .obj-answer.visible{display:block;}
+
+  .divider{display:flex;align-items:center;gap:12px;margin:20px 0;color:var(--gray);font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;}
+  .divider::before,.divider::after{content:'';flex:1;height:1px;background:#E5E7EB;}
+
+  .close-card{background:linear-gradient(135deg,#1A1A1A 0%,#2D4A30 100%);color:white;border:none;}
+  .close-card h2{color:white;}
+  .close-card .subtitle{color:var(--gold);}
+  .close-card .script-box{background:rgba(255,255,255,0.08);border-left-color:var(--gold);}
+  .close-card .script-box::before{background:var(--gold);color:var(--black);}
+  .close-card .script-box p{color:rgba(255,255,255,0.92);}
+
+  .book-options{display:flex;gap:10px;margin-top:16px;}
+  .book-option{flex:1;background:rgba(255,255,255,0.1);border:1.5px solid rgba(255,255,255,0.2);border-radius:10px;padding:12px;text-align:center;cursor:pointer;transition:all 0.2s;}
+  .book-option:hover{background:var(--gold);border-color:var(--gold);}
+  .book-option:hover .bo-label{color:var(--black);}
+  .bo-icon{font-size:22px;display:block;margin-bottom:4px;}
+  .bo-label{font-size:12px;color:rgba(255,255,255,0.8);font-weight:500;white-space:pre-line;}
+
+  .reminder-strip{background:var(--gold);border-radius:12px;padding:14px 18px;display:flex;align-items:center;gap:14px;margin:20px 0;}
+  .reminder-strip .r-icon{font-size:28px;flex-shrink:0;}
+  .reminder-strip p{font-size:13px;font-weight:600;color:var(--black);line-height:1.4;}
+
+  .exit-card{background:var(--gray-light);border-color:#D1D5DB;}
+  .exit-card .script-box{background:white;border-color:#9CA3AF;}
+  .exit-card .script-box::before{background:#6B7280;}
+
+  .tracking-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:20px 0;}
+  .track-item{background:var(--sage-pale);border-radius:10px;padding:12px 8px;text-align:center;}
+  .track-item .ti-num{font-family:'DM Serif Display',serif;font-size:26px;color:var(--sage-dark);line-height:1;}
+  .track-item .ti-label{font-size:10px;color:var(--sage-dark);font-weight:600;text-transform:uppercase;letter-spacing:0.06em;margin-top:4px;}
+
+  .step-num{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;background:var(--black);color:white;border-radius:50%;font-weight:700;font-size:14px;margin-bottom:12px;}
+  .close-card .step-num{background:var(--gold);color:var(--black);}
+
+  .section-label{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray);margin:24px 0 10px;}
+
+  .float-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(26,26,26,0.95);backdrop-filter:blur(10px);padding:12px 20px 20px;display:flex;gap:10px;border-top:1px solid #333;}
+  .nav-btn{flex:1;padding:12px;border-radius:10px;border:none;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all 0.2s;}
+  .nav-btn.prev{background:#333;color:#999;}
+  .nav-btn.next{background:var(--sage);color:white;}
+  .nav-btn.prev:hover{background:#444;color:white;}
+  .nav-btn.next:hover{background:var(--sage-dark);}
+  .nav-btn:disabled{opacity:0.3;cursor:default;}
+  .obj-quick-btn{background:var(--red);color:white;padding:12px 16px;border-radius:10px;border:none;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;}
+
+  @media(max-width:768px){
+    main{padding:16px 16px 80px;}
+    .card{padding:18px 16px;}
+    .obj-tabs{grid-template-columns:1fr 1fr;}
+    .book-options{flex-direction:column;}
+    .lang-btn{padding:5px 10px;font-size:11px;}
   }
 </style>
 </head>
@@ -593,336 +123,175 @@
 
 <header class="header">
   <div class="header-left">
-    <h1>CVC Spine & Sport</h1>
-    <p>Guía de Llamadas · División Española</p>
+    <h1>CVC Spine &amp; Sport</h1>
+    <p id="header-sub"></p>
   </div>
-  <div class="step-indicator" id="stepDots"></div>
+  <div class="header-right">
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btn-es" onclick="setLang('es')">ES</button>
+      <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+    <div class="step-indicator" id="stepDots"></div>
+  </div>
 </header>
 
 <main>
-
-  <!-- REMINDER STRIP -->
   <div class="reminder-strip">
     <div class="r-icon">🎯</div>
-    <p>Tu trabajo <u>NO</u> es explicar todo.<br>Tu trabajo es <strong>entender el dolor → llevarlos a la visita</strong>.</p>
+    <p id="reminder-text"></p>
   </div>
 
-  <!-- ============= STEP 1: CONNECT ============= -->
+  <!-- STEP 1 -->
   <div class="card active-card" id="step-1" data-step="1">
-    <div class="phase-badge connect"><span class="phase-dot"></span> CONECTAR</div>
+    <div class="phase-badge connect"><span class="phase-dot"></span><span class="t" data-key="badge_connect"></span></div>
     <div class="step-num">1</div>
-    <h2>Abrir la llamada</h2>
-    <p class="subtitle">Objetivo: Generar confianza en los primeros 10 segundos</p>
-
-    <div class="script-box">
-      <p>"Hola, gracias por llamar a CVC Spine & Sport. Mi nombre es [Tu nombre]. Antes de explicarle todo lo que hacemos, me gustaría entender bien qué está pasando con su dolor — para ver si realmente le podemos ayudar. ¿Tiene un momento?"</p>
-    </div>
-
-    <div class="tip-box">
-      <div class="tip-icon">💡</div>
-      <p><strong>Tono:</strong> Cálido, no apresurado. Habla como si fueras una amiga de la familia, no una vendedora. La pregunta "¿tiene un momento?" les da control y reduce la resistencia.</p>
-    </div>
-
-    <div class="tip-box">
-      <div class="tip-icon">📱</div>
-      <p><strong>Si llamas tú primero (lead de Facebook):</strong> "Hola, estoy buscando a [Nombre]. Soy [Tu nombre] de CVC Spine & Sport — vi que se interesó en nuestra terapia para el dolor. ¿Es buen momento para hablar un par de minutos?"</p>
-    </div>
+    <h2 class="t" data-key="s1_title"></h2>
+    <p class="subtitle t" data-key="s1_sub"></p>
+    <div class="script-box" data-label-key="say_this"><p class="t" data-key="s1_script1"></p></div>
+    <div class="tip-box"><div class="tip-icon">💡</div><p class="t" data-key="s1_tip1"></p></div>
+    <div class="tip-box"><div class="tip-icon">📱</div><p class="t" data-key="s1_tip2"></p></div>
   </div>
 
-  <!-- ============= STEP 2: CONTROL ============= -->
+  <!-- STEP 2 -->
   <div class="card" id="step-2" data-step="2">
-    <div class="phase-badge control"><span class="phase-dot"></span> CONTROLAR</div>
+    <div class="phase-badge control"><span class="phase-dot"></span><span class="t" data-key="badge_control"></span></div>
     <div class="step-num">2</div>
-    <h2>Hacer las preguntas</h2>
-    <p class="subtitle">Objetivo: Que ELLOS hablen — tú escucha y toma notas</p>
-
-    <ul class="question-list">
-      <li><div class="q-num">1</div> ¿<strong>Dónde</strong> exactamente le duele?</li>
-      <li><div class="q-num">2</div> ¿<strong>Desde cuándo</strong> tiene ese dolor?</li>
-      <li><div class="q-num">3</div> ¿Qué tan <strong>fuerte</strong> es el dolor? (Del 1 al 10)</li>
-      <li><div class="q-num">4</div> ¿<strong>Qué ha intentado</strong> hasta ahora — pastillas, terapia, inyecciones?</li>
-      <li><div class="q-num">5</div> ¿Cómo está <strong>afectando su vida diaria</strong> — el trabajo, el sueño, la familia?</li>
-    </ul>
-
-    <div class="tip-box">
-      <div class="tip-icon">🤫</div>
-      <p><strong>Usa el silencio.</strong> Después de cada respuesta, haz una pausa de 2–3 segundos. Ellos llenarán ese silencio con más información valiosa.</p>
-    </div>
-
-    <div class="tip-box">
-      <div class="tip-icon">❤️</div>
-      <p><strong>Validar siempre:</strong> "Entiendo... eso suena muy difícil." / "¡Ay, cuánto tiempo aguantando eso!" — esto construye confianza real.</p>
-    </div>
+    <h2 class="t" data-key="s2_title"></h2>
+    <p class="subtitle t" data-key="s2_sub"></p>
+    <ul class="question-list" id="question-list"></ul>
+    <div class="tip-box"><div class="tip-icon">🤫</div><p class="t" data-key="s2_tip1"></p></div>
+    <div class="tip-box"><div class="tip-icon">❤️</div><p class="t" data-key="s2_tip2"></p></div>
   </div>
 
-  <!-- ============= STEP 3: POSITION ============= -->
+  <!-- STEP 3 -->
   <div class="card" id="step-3" data-step="3">
-    <div class="phase-badge position"><span class="phase-dot"></span> POSICIONAR</div>
+    <div class="phase-badge position"><span class="phase-dot"></span><span class="t" data-key="badge_position"></span></div>
     <div class="step-num">3</div>
-    <h2>Conectar su dolor con nuestra solución</h2>
-    <p class="subtitle">Objetivo: Que sientan que los entendemos perfectamente</p>
-
-    <div class="script-box">
-      <p>"Perfecto. Por lo que me está diciendo — [REPETIR SUS PALABRAS] — este es exactamente el tipo de caso donde vemos muy buenos resultados con la terapia de ondas de choque."</p>
-      <div class="alt">⬆ Usa SUS palabras, no las tuyas. Si dijeron "me duele la espalda baja desde hace 3 años", di eso exactamente.</div>
-    </div>
-
-    <div class="script-box">
-      <p>"Lo que hacemos es usar ondas acústicas — son como pequeñas vibraciones de energía — que mejoran la circulación, reducen la inflamación, y le ayudan al cuerpo a sanar de adentro hacia afuera. Sin cirugía. Sin pastillas."</p>
-    </div>
-
-    <div class="tip-box">
-      <div class="tip-icon">🚫</div>
-      <p><strong>NO entres en detalles técnicos.</strong> Si preguntan "¿cómo funciona exactamente?", di: "Eso es exactamente lo que el Doctor le explica en la visita — él es el experto. Lo que sí le puedo decir es que los resultados hablan por sí solos."</p>
-    </div>
-
-    <div class="script-box">
-      <p>"Algunas personas sienten alivio desde la primera sesión. Otras necesitan varias sesiones para ver el cambio. Lo que hacemos en la primera visita es evaluar exactamente cómo responde su cuerpo — y desde ahí, el Doctor le da un plan claro."</p>
-    </div>
+    <h2 class="t" data-key="s3_title"></h2>
+    <p class="subtitle t" data-key="s3_sub"></p>
+    <div class="script-box" data-label-key="say_this"><p class="t" data-key="s3_script1"></p><div class="alt t" data-key="s3_alt1"></div></div>
+    <div class="script-box" data-label-key="say_this"><p class="t" data-key="s3_script2"></p></div>
+    <div class="tip-box"><div class="tip-icon">🚫</div><p class="t" data-key="s3_tip1"></p></div>
+    <div class="script-box" data-label-key="say_this"><p class="t" data-key="s3_script3"></p></div>
   </div>
 
-  <!-- ============= STEP 4: CONFIDENCE ============= -->
+  <!-- STEP 4 -->
   <div class="card" id="step-4" data-step="4">
-    <div class="phase-badge control" style="background:#F5F0FF; color:#6B4CC8;"><span class="phase-dot" style="background:#6B4CC8;"></span> CONFIANZA</div>
+    <div class="phase-badge control" style="background:#F5F0FF;color:#6B4CC8;"><span class="phase-dot" style="background:#6B4CC8;"></span><span class="t" data-key="badge_confidence"></span></div>
     <div class="step-num">4</div>
-    <h2>Reforzar la decisión</h2>
-    <p class="subtitle">Objetivo: Eliminar la duda antes del cierre</p>
-
-    <div class="script-box">
-      <p>"Hemos trabajado con muchas personas que llegaron exactamente como usted — que ya habían intentado de todo, que ya no sabían qué más hacer — y han tenido resultados que no esperaban."</p>
-    </div>
-
-    <div class="tip-box">
-      <div class="tip-icon">👥</div>
-      <p><strong>Si tienes un testimonio relevante:</strong> "Tuvimos una señora con dolor de rodilla desde hace años... llegó sin esperar mucho, y después de unas semanas nos llamó llorando de emoción." (Historia real, sin nombres.)</p>
-    </div>
-
-    <div class="script-box">
-      <p>"El Doctor Urrutia — nuestro quiropráctico — tiene años de experiencia tratando exactamente este tipo de dolor. Él fue militar, es atleta, y entiende el dolor de una manera diferente. No solo trata el síntoma — va a la raíz del problema."</p>
-    </div>
-
-    <div class="tip-box">
-      <div class="tip-icon">⭐</div>
-      <p><strong>Transición al cierre:</strong> Una vez que sientes que confían, NO sigas hablando. Hacer la pregunta de cierre es la acción más importante.</p>
-    </div>
+    <h2 class="t" data-key="s4_title"></h2>
+    <p class="subtitle t" data-key="s4_sub"></p>
+    <div class="script-box" data-label-key="say_this"><p class="t" data-key="s4_script1"></p></div>
+    <div class="tip-box"><div class="tip-icon">👥</div><p class="t" data-key="s4_tip1"></p></div>
+    <div class="script-box" data-label-key="say_this"><p class="t" data-key="s4_script2"></p></div>
+    <div class="tip-box"><div class="tip-icon">⭐</div><p class="t" data-key="s4_tip2"></p></div>
   </div>
 
-  <!-- ============= STEP 5: CLOSE ============= -->
+  <!-- STEP 5 CLOSE -->
   <div class="card close-card" id="step-5" data-step="5">
-    <div class="phase-badge close" style="background:rgba(201,168,76,0.2); color:#F0D990;"><span class="phase-dot" style="background:#F0D990;"></span> CERRAR</div>
+    <div class="phase-badge close" style="background:rgba(201,168,76,0.2);color:#F0D990;"><span class="phase-dot" style="background:#F0D990;"></span><span class="t" data-key="badge_close"></span></div>
     <div class="step-num">5</div>
-    <h2>Agendar la visita de $47</h2>
-    <p class="subtitle">Objetivo: Salir de la llamada con una cita confirmada</p>
-
-    <div class="script-box">
-      <p>"Lo mejor que podemos hacer es empezar con una visita de descubrimiento. Son $47, incluye evaluación completa y el tratamiento inicial. No se compromete a nada — solo viene a ver cómo responde su cuerpo."</p>
-      <div class="alt" style="color: #F0D990;">Pausa. Deja que ellos respondan. No llenes el silencio.</div>
-    </div>
-
-    <div class="script-box">
-      <p>"¿Le funciona mejor temprano en la semana — como lunes o martes — o prefiere más tarde, como jueves o viernes?"</p>
-      <div class="alt" style="color: #F0D990;">✅ Siempre da dos opciones. No preguntes "¿quiere venir?" — asume que sí y deja que escojan cuándo.</div>
-    </div>
-
+    <h2 class="t" data-key="s5_title"></h2>
+    <p class="subtitle t" data-key="s5_sub"></p>
+    <div class="script-box" data-label-key="say_this"><p class="t" data-key="s5_script1"></p><div class="alt t" data-key="s5_alt1"></div></div>
+    <div class="script-box" data-label-key="say_this"><p class="t" data-key="s5_script2"></p><div class="alt t" data-key="s5_alt2"></div></div>
     <div class="book-options">
-      <div class="book-option">
-        <span class="bo-icon">📅</span>
-        <div class="bo-label">Inicio de semana<br><small>Lun · Mar</small></div>
-      </div>
-      <div class="book-option">
-        <span class="bo-icon">📅</span>
-        <div class="bo-label">Final de semana<br><small>Jue · Vie</small></div>
-      </div>
+      <div class="book-option"><span class="bo-icon">📅</span><div class="bo-label t" data-key="s5_early"></div></div>
+      <div class="book-option"><span class="bo-icon">📅</span><div class="bo-label t" data-key="s5_late"></div></div>
     </div>
-
-    <div class="script-box" style="margin-top: 18px;">
-      <p>"Perfecto. Le voy a enviar un mensaje de texto con la dirección y la confirmación de su cita. ¿Me confirma su número de celular? Y por favor, si algo cambia, avíseme con tiempo para darle ese espacio a otra persona que lo necesita."</p>
-    </div>
-
-    <div class="tip-box" style="background: rgba(255,255,255,0.08); border-color: rgba(201,168,76,0.4);">
+    <div class="script-box" data-label-key="say_this" style="margin-top:18px;"><p class="t" data-key="s5_script3"></p></div>
+    <div class="tip-box" style="background:rgba(255,255,255,0.08);border-color:rgba(201,168,76,0.4);">
       <div class="tip-icon">📍</div>
-      <p style="color: rgba(255,255,255,0.8);"><strong style="color: var(--gold);">Dirección:</strong> 1001 Glade Rd, Suite 120, Colleyville, TX 76034<br><strong style="color: var(--gold);">Teléfono:</strong> (817) 420-7696</p>
+      <p style="color:rgba(255,255,255,0.8);">1001 Glade Rd, Suite 120, Colleyville, TX 76034 &nbsp;·&nbsp; (817) 420-7696</p>
     </div>
   </div>
 
-  <!-- ============= OBJECTION SECTION ============= -->
-  <div class="divider">⚠️ Manejo de Objeciones</div>
-
+  <!-- OBJECTIONS -->
+  <div class="divider"><span class="t" data-key="div_objections"></span></div>
   <div class="card" id="step-obj" data-step="obj">
-    <div class="phase-badge objection"><span class="phase-dot"></span> OBJECIONES</div>
-    <h2>Cuando digan "pero..."</h2>
-    <p class="subtitle">Selecciona la objeción que están dando</p>
-
-    <div class="obj-tabs">
-      <button class="obj-tab selected" onclick="showObj('cost', this)">💰 El precio</button>
-      <button class="obj-tab" onclick="showObj('unsure', this)">🤔 No estoy seguro/a</button>
-      <button class="obj-tab" onclick="showObj('time', this)">⏰ No tengo tiempo</button>
-      <button class="obj-tab" onclick="showObj('condition', this)">🩺 ¿Sirve para lo mío?</button>
-      <button class="obj-tab" onclick="showObj('consult', this)">👨‍👩‍👧 Tengo que consultar</button>
-      <button class="obj-tab" onclick="showObj('think', this)">💭 Déjame pensarlo</button>
-    </div>
-
-    <!-- COST -->
+    <div class="phase-badge objection"><span class="phase-dot"></span><span class="t" data-key="badge_objection"></span></div>
+    <h2 class="t" data-key="obj_title"></h2>
+    <p class="subtitle t" data-key="obj_sub"></p>
+    <div class="obj-tabs" id="obj-tabs-row"></div>
     <div class="obj-answer visible" id="obj-cost">
-      <div class="script-box" style="background:#FDECEA; border-color: var(--red);">
-        <p>"Entiendo completamente — y lo respeto. Pero quiero que piense en esto: ¿cuánto ha gastado ya en pastillas, visitas al médico, o inyecciones que no le han dado resultado? Esta visita es $47. Si no le ayuda, no pierde nada grande. Pero si sí le ayuda... puede cambiarle la vida."</p>
-      </div>
-      <div class="tip-box">
-        <div class="tip-icon">➡️</div>
-        <p>Después de esta respuesta, <strong>vuelve directo al cierre:</strong> "¿Le funciona mejor a principios o final de semana?"</p>
-      </div>
+      <div class="script-box" style="background:#FDECEA;border-color:var(--red);" data-label-key="say_this"><p class="t" data-key="obj_cost_script"></p></div>
+      <div class="tip-box"><div class="tip-icon">➡️</div><p class="t" data-key="obj_cost_tip"></p></div>
     </div>
-
-    <!-- UNSURE -->
     <div class="obj-answer" id="obj-unsure">
-      <div class="script-box" style="background:#FDECEA; border-color: var(--red);">
-        <p>"Tiene todo el sentido — por eso existe esta visita. No le estamos pidiendo que empiece un programa de 10 sesiones sin saber si funciona. La visita de $47 es precisamente para que pueda ver, sentir, y decidir con información real. Sin compromiso."</p>
-      </div>
-      <div class="tip-box">
-        <div class="tip-icon">➡️</div>
-        <p>Pausa. Si siguen dudando: "¿Qué sería lo que necesitaría saber para sentirse seguro/a de venir?"</p>
-      </div>
+      <div class="script-box" style="background:#FDECEA;border-color:var(--red);" data-label-key="say_this"><p class="t" data-key="obj_unsure_script"></p></div>
+      <div class="tip-box"><div class="tip-icon">➡️</div><p class="t" data-key="obj_unsure_tip"></p></div>
     </div>
-
-    <!-- TIME -->
     <div class="obj-answer" id="obj-time">
-      <div class="script-box" style="background:#FDECEA; border-color: var(--red);">
-        <p>"Las sesiones son rápidas — normalmente entre 10 y 15 minutos de tratamiento. La visita inicial es un poco más para que el Doctor le haga la evaluación, pero calculamos alrededor de 45 minutos total. ¿Hay algún día de la semana que tenga aunque sea una hora libre?"</p>
-      </div>
+      <div class="script-box" style="background:#FDECEA;border-color:var(--red);" data-label-key="say_this"><p class="t" data-key="obj_time_script"></p></div>
     </div>
-
-    <!-- CONDITION -->
     <div class="obj-answer" id="obj-condition">
-      <div class="script-box" style="background:#FDECEA; border-color: var(--red);">
-        <p>"Esa es exactamente la pregunta correcta. La terapia de ondas de choque funciona para muchos tipos de dolor — espalda, rodilla, hombro, talón, nervios... Pero la única manera de saber si su caso específico es candidato es que el Doctor le haga la evaluación. Por eso existe la visita de $47 — para no adivinar."</p>
-      </div>
+      <div class="script-box" style="background:#FDECEA;border-color:var(--red);" data-label-key="say_this"><p class="t" data-key="obj_condition_script"></p></div>
     </div>
-
-    <!-- CONSULT -->
     <div class="obj-answer" id="obj-consult">
-      <div class="script-box" style="background:#FDECEA; border-color: var(--red);">
-        <p>"Claro que sí — es una decisión de familia. ¿Cree que ellos también estarían interesados en que usted encuentre alivio? [Pausa.] ¿Qué tal si apartamos la cita con anticipación y si necesita cancelar, lo hace sin problema? Así no pierde el espacio."</p>
-      </div>
+      <div class="script-box" style="background:#FDECEA;border-color:var(--red);" data-label-key="say_this"><p class="t" data-key="obj_consult_script"></p></div>
     </div>
-
-    <!-- THINK -->
     <div class="obj-answer" id="obj-think">
-      <div class="script-box" style="background:#FDECEA; border-color: var(--red);">
-        <p>"Absolutamente. ¿Puedo preguntarle — qué es lo que más le hace dudar? [Escucha.] Tiene sentido. Mire, lo que sí le puedo decir es que los espacios se llenan rápido. ¿Qué le parece si le aparto uno tentativo y si cambia de opinión me avisa? Así no presiono ni pierde la oportunidad."</p>
-      </div>
-      <div class="tip-box">
-        <div class="tip-icon">⚡</div>
-        <p><strong>Truco:</strong> Esa pregunta "¿qué es lo que más le hace dudar?" casi siempre revela la objeción real. Úsala siempre que "tengo que pensarlo" no tiene razón específica.</p>
-      </div>
+      <div class="script-box" style="background:#FDECEA;border-color:var(--red);" data-label-key="say_this"><p class="t" data-key="obj_think_script"></p></div>
+      <div class="tip-box"><div class="tip-icon">⚡</div><p class="t" data-key="obj_think_tip"></p></div>
     </div>
   </div>
 
-  <!-- ============= NOT A CANDIDATE ============= -->
-  <div class="divider">❌ Si NO es candidato</div>
-
+  <!-- EXIT -->
+  <div class="divider"><span class="t" data-key="div_exit"></span></div>
   <div class="card exit-card" id="step-exit" data-step="exit">
-    <div class="phase-badge" style="background:#F3F4F6; color:#6B7280;"><span class="phase-dot" style="background:#6B7280;"></span> SALIDA AMABLE</div>
-    <h2>Cuando no podemos ayudar</h2>
-    <p class="subtitle">No todos los leads son candidatos — y eso está bien</p>
-
-    <div class="script-box">
-      <p>"Escuche, quiero ser honesta con usted — por lo que me cuenta, no estoy segura de que seamos el mejor recurso para lo que necesita en este momento. No quiero hacerle perder su tiempo ni su dinero. Lo que sí le recomendaría es [especialista/médico]. ¿Le gustaría que le diera más información sobre eso?"</p>
-    </div>
-
-    <div class="tip-box">
-      <div class="tip-icon">🌟</div>
-      <p>Esta honestidad <strong>genera más confianza a largo plazo</strong> que forzar una venta. Muchas veces regresan o nos mandan referidos porque los tratamos con respeto.</p>
-    </div>
+    <div class="phase-badge" style="background:#F3F4F6;color:#6B7280;"><span class="phase-dot" style="background:#6B7280;"></span><span class="t" data-key="badge_exit"></span></div>
+    <h2 class="t" data-key="exit_title"></h2>
+    <p class="subtitle t" data-key="exit_sub"></p>
+    <div class="script-box" data-label-key="say_this"><p class="t" data-key="exit_script"></p></div>
+    <div class="tip-box"><div class="tip-icon">🌟</div><p class="t" data-key="exit_tip"></p></div>
   </div>
 
-  <!-- ============= TRACKING ============= -->
-  <div class="divider">📊 Tu Seguimiento Diario</div>
-
+  <!-- TRACKING -->
+  <div class="divider"><span class="t" data-key="div_tracking"></span></div>
   <div class="tracking-strip">
-    <div class="track-item">
-      <div class="ti-num">___</div>
-      <div class="ti-label">Leads Recibidos</div>
-    </div>
-    <div class="track-item">
-      <div class="ti-num">___</div>
-      <div class="ti-label">Llamadas Hechas</div>
-    </div>
-    <div class="track-item">
-      <div class="ti-num">___</div>
-      <div class="ti-label">Citas Agendadas</div>
-    </div>
-    <div class="track-item">
-      <div class="ti-num">___</div>
-      <div class="ti-label">Se Presentaron</div>
-    </div>
+    <div class="track-item"><div class="ti-num">___</div><div class="ti-label t" data-key="track_leads"></div></div>
+    <div class="track-item"><div class="ti-num">___</div><div class="ti-label t" data-key="track_calls"></div></div>
+    <div class="track-item"><div class="ti-num">___</div><div class="ti-label t" data-key="track_booked"></div></div>
+    <div class="track-item"><div class="ti-num">___</div><div class="ti-label t" data-key="track_showed"></div></div>
   </div>
 
-  <!-- ============= TEXT TEMPLATES ============= -->
-  <div class="divider">📱 Mensajes de Texto</div>
-
+  <!-- TEXTS -->
+  <div class="divider"><span class="t" data-key="div_texts"></span></div>
   <div class="card" id="step-texts" data-step="texts">
-    <div class="phase-badge control"><span class="phase-dot"></span> SEGUIMIENTO</div>
-    <h2>Secuencia de mensajes</h2>
-    <p class="subtitle">Úsalos en orden si no contestan la llamada</p>
-
-    <div class="section-label">Mensaje 1 · Inmediato</div>
-    <div class="script-box">
-      <p>"¡Hola! Soy [Nombre] de CVC Spine & Sport 👋 Vi que está interesado/a en la terapia de ondas de choque para su dolor. ¿Me puede contar un poco sobre lo que está sintiendo para ver si le podemos ayudar?"</p>
-    </div>
-
-    <div class="section-label">Mensaje 2 · Después de respuesta positiva</div>
-    <div class="script-box">
-      <p>"Perfecto, por lo que me comenta parece muy buen candidato/a. Tenemos una visita de descubrimiento por $47 que incluye evaluación completa y el primer tratamiento. ¿Le funciona mejor a principios de semana o hacia el final?"</p>
-    </div>
-
-    <div class="section-label">Mensaje 3 · Sin respuesta (24 hrs)</div>
-    <div class="script-box">
-      <p>"¡Hola! Solo quería darle seguimiento 🙏 Muchas personas con dolor como el suyo han tenido muy buenos resultados. Si le gustaría apartar su visita, aquí estoy."</p>
-    </div>
-
-    <div class="section-label">Mensaje 4 · Final (48–72 hrs)</div>
-    <div class="script-box">
-      <p>"Último mensaje por mi parte 🙏 Todavía tenemos el especial de $47 disponible esta semana. Si le interesa, puede agendar aquí: [LINK]. Que tenga buen día."</p>
-    </div>
-
-    <div class="section-label">Si nos llamaron y no contestamos</div>
-    <div class="script-box">
-      <p>"¡Hola! Vimos que nos llamó 📞 ¿Le gustaría información sobre la terapia de ondas de choque para su dolor? Estoy aquí para ayudarle."</p>
-    </div>
+    <div class="phase-badge control"><span class="phase-dot"></span><span class="t" data-key="badge_followup"></span></div>
+    <h2 class="t" data-key="texts_title"></h2>
+    <p class="subtitle t" data-key="texts_sub"></p>
+    <div class="section-label t" data-key="txt_lbl1"></div>
+    <div class="script-box" data-label-key="say_this"><p class="t" data-key="txt1"></p></div>
+    <div class="section-label t" data-key="txt_lbl2"></div>
+    <div class="script-box" data-label-key="say_this"><p class="t" data-key="txt2"></p></div>
+    <div class="section-label t" data-key="txt_lbl3"></div>
+    <div class="script-box" data-label-key="say_this"><p class="t" data-key="txt3"></p></div>
+    <div class="section-label t" data-key="txt_lbl4"></div>
+    <div class="script-box" data-label-key="say_this"><p class="t" data-key="txt4"></p></div>
+    <div class="section-label t" data-key="txt_lbl5"></div>
+    <div class="script-box" data-label-key="say_this"><p class="t" data-key="txt5"></p></div>
   </div>
 
-  <!-- ============= CALENDAR BOOKING ============= -->
-  <div class="divider">📅 Agendar la Cita</div>
-
-  <div class="card" id="step-book" data-step="book" style="padding: 0; overflow: hidden;">
-    <!-- Card header -->
-    <div style="background: linear-gradient(135deg, #1A1A1A 0%, #2D4A30 100%); padding: 24px 32px 20px;">
-      <div class="phase-badge close" style="background:rgba(201,168,76,0.2); color:#F0D990; margin-bottom: 12px;"><span class="phase-dot" style="background:#F0D990;"></span> AGENDAR</div>
-      <h2 style="font-family:'DM Serif Display',serif; color:white; font-size:22px; margin-bottom:4px;">Calendario de Citas</h2>
-      <p style="font-size:12px; color: #C9A84C; font-weight:500; text-transform:uppercase; letter-spacing:0.06em;">Visita de Descubrimiento · $47 · Evaluación + Tratamiento Inicial</p>
+  <!-- CALENDAR -->
+  <div class="divider"><span class="t" data-key="div_calendar"></span></div>
+  <div class="card" id="step-book" data-step="book" style="padding:0;overflow:hidden;">
+    <div style="background:linear-gradient(135deg,#1A1A1A 0%,#2D4A30 100%);padding:24px 32px 20px;">
+      <div class="phase-badge close" style="background:rgba(201,168,76,0.2);color:#F0D990;margin-bottom:12px;"><span class="phase-dot" style="background:#F0D990;"></span><span class="t" data-key="badge_book"></span></div>
+      <h2 style="font-family:'DM Serif Display',serif;color:white;font-size:22px;margin-bottom:4px;" class="t" data-key="book_title"></h2>
+      <p style="font-size:12px;color:#C9A84C;font-weight:500;text-transform:uppercase;letter-spacing:0.06em;" class="t" data-key="book_sub"></p>
     </div>
-
-    <!-- Confirm script -->
-    <div style="padding: 20px 32px 16px; background: #EEF4EF; border-bottom: 1px solid #D1D5DB;">
-      <div style="font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#4A6B4D; margin-bottom:8px;">Di esto antes de abrir el calendario</div>
-      <p style="font-size:13px; font-style:italic; color:#1A1A1A; line-height:1.6;">"Perfecto — voy a apartar su espacio ahora mismo. Le voy a pedir su nombre completo y número de celular para la confirmación. ¿Me los puede dar?"</p>
+    <div style="padding:20px 32px 16px;background:#EEF4EF;border-bottom:1px solid #D1D5DB;">
+      <div style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#4A6B4D;margin-bottom:8px;" class="t" data-key="book_pre_label"></div>
+      <p style="font-size:13px;font-style:italic;color:#1A1A1A;line-height:1.6;" class="t" data-key="book_pre_script"></p>
     </div>
-
-    <!-- Calendar embed -->
-    <div style="padding: 0; background: white;">
-      <iframe
-        src="https://api.leadconnectorhq.com/widget/booking/t56udA42FxbQ2bA0tOS1"
-        style="width:100%; height:680px; border:none; display:block;"
-        scrolling="yes"
-        id="calendarFrame"
-      ></iframe>
+    <div style="padding:0;background:white;">
+      <iframe src="https://api.leadconnectorhq.com/widget/booking/t56udA42FxbQ2bA0tOS1" style="width:100%;height:680px;border:none;display:block;" scrolling="yes" id="calendarFrame"></iframe>
     </div>
-
-    <!-- After booking reminder -->
-    <div style="padding: 16px 32px 24px; background: #FFFBEB; border-top: 2px solid #C9A84C;">
-      <div style="font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#8B6914; margin-bottom:8px;">✅ Después de agendar — di esto</div>
-      <p style="font-size:13px; font-style:italic; color:#1A1A1A; line-height:1.6;">"Listo — ya quedó apartado su espacio. Le va a llegar una confirmación por mensaje de texto. Si algo cambia, por favor avíseme con tiempo para darle ese lugar a alguien más. ¡Nos vemos pronto!"</p>
-      <div style="margin-top:12px; padding:10px 14px; background:white; border-radius:8px; border:1px solid #E5E7EB; font-size:12px; color:#6B7280;">
+    <div style="padding:16px 32px 24px;background:#FFFBEB;border-top:2px solid #C9A84C;">
+      <div style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#8B6914;margin-bottom:8px;" class="t" data-key="book_post_label"></div>
+      <p style="font-size:13px;font-style:italic;color:#1A1A1A;line-height:1.6;" class="t" data-key="book_post_script"></p>
+      <div style="margin-top:12px;padding:10px 14px;background:white;border-radius:8px;border:1px solid #E5E7EB;font-size:12px;color:#6B7280;">
         📍 <strong style="color:#1A1A1A;">1001 Glade Rd, Suite 120, Colleyville, TX 76034</strong> &nbsp;·&nbsp; 📞 <strong style="color:#1A1A1A;">(817) 420-7696</strong>
       </div>
     </div>
@@ -930,82 +299,243 @@
 
 </main>
 
-<!-- FLOATING NAV -->
 <div class="float-nav">
-  <button class="nav-btn prev" id="prevBtn" onclick="navigate(-1)" disabled>← Atrás</button>
-  <button class="obj-quick-btn" onclick="jumpToObj()">⚠️ Objeción</button>
-  <button class="obj-quick-btn" onclick="jumpToBook()" style="background: #2D6A4F;">📅 Agendar</button>
-  <button class="nav-btn next" id="nextBtn" onclick="navigate(1)">Siguiente →</button>
+  <button class="nav-btn prev" id="prevBtn" onclick="navigate(-1)" disabled></button>
+  <button class="obj-quick-btn" id="btn-obj" onclick="jumpToObj()"></button>
+  <button class="obj-quick-btn" id="btn-book" onclick="jumpToBook()" style="background:#2D6A4F;"></button>
+  <button class="nav-btn next" id="nextBtn" onclick="navigate(1)"></button>
 </div>
 
 <script>
-  const stepOrder = ['step-1','step-2','step-3','step-4','step-5','step-obj','step-texts','step-book'];
-  let currentStep = 0;
+const T={
+es:{
+"header-sub":"Guía de Llamadas · División Española",
+"page-title":"CVC Spine & Sport · Guía de Llamadas",
+"say_this":"DI ESTO",
+"reminder-text":"Tu trabajo <u>NO</u> es explicar todo.<br>Tu trabajo es <strong>entender el dolor → llevarlos a la visita</strong>.",
+"badge_connect":"CONECTAR","badge_control":"CONTROLAR","badge_position":"POSICIONAR",
+"badge_confidence":"CONFIANZA","badge_close":"CERRAR","badge_objection":"OBJECIONES",
+"badge_exit":"SALIDA AMABLE","badge_followup":"SEGUIMIENTO","badge_book":"AGENDAR",
+"s1_title":"Abrir la llamada","s1_sub":"Objetivo: Generar confianza en los primeros 10 segundos",
+"s1_script1":'"Hola, gracias por llamar a CVC Spine & Sport. Mi nombre es [Tu nombre]. Antes de explicarle todo lo que hacemos, me gustaría entender bien qué está pasando con su dolor — para ver si realmente le podemos ayudar. ¿Tiene un momento?"',
+"s1_tip1":"<strong>Tono:</strong> Cálido, no apresurado. Habla como si fueras una amiga de la familia. La pregunta \"¿tiene un momento?\" les da control y reduce la resistencia.",
+"s1_tip2":"<strong>Si llamas tú primero:</strong> \"Hola, estoy buscando a [Nombre]. Soy [Tu nombre] de CVC Spine & Sport — vi que se interesó en nuestra terapia para el dolor. ¿Es buen momento para hablar?\"",
+"s2_title":"Hacer las preguntas","s2_sub":"Objetivo: Que ELLOS hablen — tú escucha y toma notas",
+"questions":["¿<strong>Dónde</strong> exactamente le duele?","¿<strong>Desde cuándo</strong> tiene ese dolor?","¿Qué tan <strong>fuerte</strong> es el dolor? (Del 1 al 10)","¿<strong>Qué ha intentado</strong> hasta ahora — pastillas, terapia, inyecciones?","¿Cómo está <strong>afectando su vida diaria</strong> — el trabajo, el sueño, la familia?"],
+"s2_tip1":"<strong>Usa el silencio.</strong> Después de cada respuesta, pausa 2–3 segundos. Ellos llenarán ese silencio con más información.",
+"s2_tip2":"<strong>Validar siempre:</strong> \"Entiendo... eso suena muy difícil.\" / \"¡Cuánto tiempo aguantando eso!\" — esto construye confianza real.",
+"s3_title":"Conectar su dolor con nuestra solución","s3_sub":"Objetivo: Que sientan que los entendemos perfectamente",
+"s3_script1":'"Perfecto. Por lo que me está diciendo — [REPETIR SUS PALABRAS] — este es exactamente el tipo de caso donde vemos muy buenos resultados con la terapia de ondas de choque."',
+"s3_alt1":"⬆ Usa SUS palabras, no las tuyas.",
+"s3_script2":'"Lo que hacemos es usar ondas acústicas que mejoran la circulación, reducen la inflamación, y ayudan al cuerpo a sanar de adentro hacia afuera. Sin cirugía. Sin pastillas."',
+"s3_tip1":"<strong>NO entres en detalles técnicos.</strong> Si preguntan cómo funciona: \"Eso es exactamente lo que el Doctor le explica en la visita. Lo que sí le puedo decir es que los resultados hablan por sí solos.\"",
+"s3_script3":'"Algunas personas sienten alivio desde la primera sesión. En la primera visita, el Doctor evalúa exactamente cómo responde su cuerpo y le da un plan claro."',
+"s4_title":"Reforzar la decisión","s4_sub":"Objetivo: Eliminar la duda antes del cierre",
+"s4_script1":'"Hemos trabajado con muchas personas que llegaron exactamente como usted — que ya habían intentado de todo — y han tenido resultados que no esperaban."',
+"s4_tip1":"<strong>Si tienes un testimonio:</strong> \"Tuvimos una señora con dolor de rodilla desde hace años... llegó sin esperar mucho, y después de unas semanas nos llamó llorando de emoción.\"",
+"s4_script2":'"El Doctor Urrutia fue militar, es atleta, y entiende el dolor de una manera diferente. No solo trata el síntoma — va a la raíz del problema."',
+"s4_tip2":"<strong>Transición al cierre:</strong> Una vez que sientes que confían, NO sigas hablando. La pregunta de cierre es lo más importante.",
+"s5_title":"Agendar la visita de $47","s5_sub":"Objetivo: Salir de la llamada con una cita confirmada",
+"s5_script1":'"Lo mejor que podemos hacer es empezar con una visita de descubrimiento. Son $47, incluye evaluación completa y el tratamiento inicial. No se compromete a nada."',
+"s5_alt1":"Pausa. Deja que ellos respondan. No llenes el silencio.",
+"s5_script2":'"¿Le funciona mejor temprano en la semana — lunes o martes — o prefiere más tarde, jueves o viernes?"',
+"s5_alt2":"✅ Siempre da dos opciones. Asume que sí y deja que escojan cuándo.",
+"s5_early":"Inicio de semana\nLun · Mar","s5_late":"Final de semana\nJue · Vie",
+"s5_script3":'"Le voy a enviar un mensaje con la dirección y la confirmación. ¿Me confirma su número de celular? Y si algo cambia, avíseme con tiempo."',
+"div_objections":"⚠️ Manejo de Objeciones","obj_title":"Cuando digan \"pero...\"","obj_sub":"Selecciona la objeción que están dando",
+"obj_tabs":[["cost","💰 El precio"],["unsure","🤔 No estoy seguro/a"],["time","⏰ No tengo tiempo"],["condition","🩺 ¿Sirve para lo mío?"],["consult","👨‍👩‍👧 Tengo que consultar"],["think","💭 Déjame pensarlo"]],
+"obj_cost_script":'"¿Cuánto ha gastado ya en pastillas o inyecciones que no le han dado resultado? Esta visita es $47. Si no le ayuda, no pierde nada grande. Pero si sí le ayuda... puede cambiarle la vida."',
+"obj_cost_tip":"Después de esta respuesta, <strong>vuelve directo al cierre:</strong> \"¿Le funciona mejor a principios o final de semana?\"",
+"obj_unsure_script":'"Por eso existe esta visita. No le pedimos que empiece un programa sin saber si funciona. La visita de $47 es para que pueda ver, sentir, y decidir con información real. Sin compromiso."',
+"obj_unsure_tip":"Pausa. Si siguen dudando: \"¿Qué necesitaría saber para sentirse seguro/a de venir?\"",
+"obj_time_script":'"Las sesiones son rápidas — 10 a 15 minutos de tratamiento. La visita inicial calculamos unos 45 minutos total. ¿Hay algún día que tenga aunque sea una hora libre?"',
+"obj_condition_script":'"La única manera de saber si su caso es candidato es que el Doctor le haga la evaluación. Por eso existe la visita de $47 — para no adivinar."',
+"obj_consult_script":'"Es una decisión de familia, claro. ¿Qué tal si apartamos la cita y si necesita cancelar, lo hace sin problema? Así no pierde el espacio."',
+"obj_think_script":'"¿Puedo preguntarle — qué es lo que más le hace dudar? [Escucha.] Tiene sentido. Los espacios se llenan rápido — ¿qué le parece si le aparto uno tentativo?"',
+"obj_think_tip":"<strong>Truco:</strong> Esa pregunta casi siempre revela la objeción real.",
+"div_exit":"❌ Si NO es candidato","exit_title":"Cuando no podemos ayudar","exit_sub":"No todos los leads son candidatos — y eso está bien",
+"exit_script":'"Quiero ser honesta con usted — no estoy segura de que seamos el mejor recurso para lo que necesita ahora. No quiero hacerle perder tiempo ni dinero. Le recomendaría [especialista/médico]."',
+"exit_tip":"Esta honestidad <strong>genera más confianza</strong> que forzar una venta. Muchas veces regresan o mandan referidos.",
+"div_tracking":"📊 Tu Seguimiento Diario",
+"track_leads":"Leads Recibidos","track_calls":"Llamadas Hechas","track_booked":"Citas Agendadas","track_showed":"Se Presentaron",
+"div_texts":"📱 Mensajes de Texto","texts_title":"Secuencia de mensajes","texts_sub":"Úsalos en orden si no contestan la llamada",
+"txt_lbl1":"Mensaje 1 · Inmediato",
+"txt1":'"¡Hola! Soy [Nombre] de CVC Spine & Sport 👋 Vi que está interesado/a en la terapia de ondas de choque. ¿Me puede contar un poco sobre su dolor para ver si le podemos ayudar?"',
+"txt_lbl2":"Mensaje 2 · Después de respuesta positiva",
+"txt2":'"Perfecto — parece muy buen candidato/a. Tenemos una visita de descubrimiento por $47. ¿Le funciona mejor a principios de semana o hacia el final?"',
+"txt_lbl3":"Mensaje 3 · Sin respuesta (24 hrs)",
+"txt3":'"¡Hola! Solo quería darle seguimiento 🙏 Muchas personas con dolor como el suyo han tenido muy buenos resultados. Si le gustaría apartar su visita, aquí estoy."',
+"txt_lbl4":"Mensaje 4 · Final (48–72 hrs)",
+"txt4":'"Último mensaje 🙏 Todavía tenemos el especial de $47 disponible. Si le interesa: [LINK]. Que tenga buen día."',
+"txt_lbl5":"Si nos llamaron y no contestamos",
+"txt5":'"¡Hola! Vimos que nos llamó 📞 ¿Le gustaría información sobre la terapia de ondas de choque? Estoy aquí para ayudarle."',
+"div_calendar":"📅 Agendar la Cita","book_title":"Calendario de Citas","book_sub":"Visita de Descubrimiento · $47 · Evaluación + Tratamiento Inicial",
+"book_pre_label":"Di esto antes de abrir el calendario",
+"book_pre_script":'"Perfecto — voy a apartar su espacio ahora mismo. ¿Me puede dar su nombre completo y número de celular?"',
+"book_post_label":"✅ Después de agendar — di esto",
+"book_post_script":'"Listo — ya quedó apartado. Le llega confirmación por texto. Si algo cambia, avíseme con tiempo. ¡Nos vemos pronto!"',
+"nav_prev":"← Atrás","nav_next":"Siguiente →","nav_obj":"⚠️ Objeción","nav_book":"📅 Agendar"
+},
 
-  function buildDots() {
-    const c = document.getElementById('stepDots');
-    stepOrder.forEach((s, i) => {
-      const d = document.createElement('div');
-      d.className = 'dot' + (i === 0 ? ' active' : '');
-      d.id = 'dot-' + i;
-      c.appendChild(d);
-    });
+en:{
+"header-sub":"Call Guide · Spanish Division",
+"page-title":"CVC Spine & Sport · Call Guide",
+"say_this":"SAY THIS",
+"reminder-text":"Your job is <u>NOT</u> to explain everything.<br>Your job is to <strong>understand the pain → get them to the visit</strong>.",
+"badge_connect":"CONNECT","badge_control":"CONTROL","badge_position":"POSITION",
+"badge_confidence":"CONFIDENCE","badge_close":"CLOSE","badge_objection":"OBJECTIONS",
+"badge_exit":"GRACEFUL EXIT","badge_followup":"FOLLOW-UP","badge_book":"SCHEDULE",
+"s1_title":"Open the Call","s1_sub":"Goal: Build trust in the first 10 seconds",
+"s1_script1":"\"Hi, thank you for calling CVC Spine & Sport. My name is [Your name]. Before I explain everything we do, I'd love to understand what's going on with your pain — to see if we can actually help. Do you have a moment?\"",
+"s1_tip1":"<strong>Tone:</strong> Warm, unhurried. Talk like a trusted friend, not a salesperson. \"Do you have a moment?\" gives them control and lowers resistance.",
+"s1_tip2":"<strong>If you're calling them first:</strong> \"Hi, I'm looking for [Name]. This is [Your name] from CVC Spine & Sport — I saw you were interested in our pain therapy. Is now a good time?\"",
+"s2_title":"Ask the Questions","s2_sub":"Goal: Let THEM talk — you listen and take notes",
+"questions":["<strong>Where</strong> exactly does it hurt?","<strong>How long</strong> have you had this pain?","On a scale of 1–10, how <strong>intense</strong> is the pain?","What have you <strong>already tried</strong> — medication, therapy, injections?","How is it <strong>affecting your daily life</strong> — work, sleep, family?"],
+"s2_tip1":"<strong>Use silence.</strong> After each answer, pause 2–3 seconds. They'll fill that silence with more valuable information.",
+"s2_tip2":"<strong>Always validate:</strong> \"I understand... that sounds really difficult.\" / \"Wow, you've been dealing with that for so long!\" — this builds genuine trust.",
+"s3_title":"Connect Their Pain to Our Solution","s3_sub":"Goal: Make them feel completely understood",
+"s3_script1":"\"Perfect. Based on what you're telling me — [REPEAT THEIR WORDS] — this is exactly the type of case where we see really strong results with shockwave therapy.\"",
+"s3_alt1":"⬆ Use THEIR words, not yours.",
+"s3_script2":"\"What we do is use acoustic waves that improve circulation, reduce inflammation, and help the body heal from the inside out. No surgery. No medication.\"",
+"s3_tip1":"<strong>DO NOT go into technical details.</strong> If they ask how it works: \"That's exactly what the Doctor explains at the visit. What I can tell you is that the results speak for themselves.\"",
+"s3_script3":"\"Some people feel relief after the first session. At the first visit, the Doctor evaluates exactly how your body responds and gives you a clear plan.\"",
+"s4_title":"Reinforce Their Decision","s4_sub":"Goal: Remove doubt before the close",
+"s4_script1":"\"We've worked with many people who came in exactly like you — who had already tried everything — and they've had results they didn't expect.\"",
+"s4_tip1":"<strong>If you have a testimonial:</strong> \"We had a woman with knee pain for years... she came in without much hope, and a few weeks later she called us in happy tears.\"",
+"s4_script2":"\"Dr. Urrutia is a veteran and an athlete. He understands pain differently — he doesn't just treat the symptom, he finds the root cause.\"",
+"s4_tip2":"<strong>Transition to the close:</strong> Once you feel they trust you, STOP talking. Asking the closing question is the most important action.",
+"s5_title":"Book the $47 Discovery Visit","s5_sub":"Goal: End the call with a confirmed appointment",
+"s5_script1":"\"The best thing we can do is start with a discovery visit. It's $47, includes a full evaluation and the initial treatment. No commitment.\"",
+"s5_alt1":"Pause. Let them respond. Don't fill the silence.",
+"s5_script2":"\"Does early in the week work — like Monday or Tuesday — or do you prefer later, like Thursday or Friday?\"",
+"s5_alt2":"✅ Always give two options. Assume yes and let them choose when.",
+"s5_early":"Early week\nMon · Tue","s5_late":"Late week\nThu · Fri",
+"s5_script3":"\"I'll send you a text with the address and your confirmation. Can you confirm your cell number? And if anything changes, please let me know ahead of time.\"",
+"div_objections":"⚠️ Objection Handling","obj_title":"When they say \"but...\"","obj_sub":"Select the objection they're giving",
+"obj_tabs":[["cost","💰 The price"],["unsure","🤔 Not sure"],["time","⏰ No time"],["condition","🩺 Will it work for me?"],["consult","👨‍👩‍👧 Need to check with someone"],["think","💭 Let me think about it"]],
+"obj_cost_script":"\"How much have you already spent on medication or injections that haven't worked? This visit is $47. If it doesn't help, you haven't lost much. But if it does... it could change your life.\"",
+"obj_cost_tip":"After this response, <strong>go straight back to the close:</strong> \"Does early or late in the week work better?\"",
+"obj_unsure_script":"\"That's exactly why this visit exists. We're not asking you to commit to 10 sessions without knowing if it works. The $47 visit lets you see, feel, and decide with real information. No commitment.\"",
+"obj_unsure_tip":"Pause. If still hesitating: \"What would you need to know to feel confident about coming in?\"",
+"obj_time_script":"\"Sessions are quick — 10 to 15 minutes of treatment. The initial visit is about 45 minutes total. Is there any day you have even just an hour free?\"",
+"obj_condition_script":"\"The only way to know if your specific case is a candidate is for the Doctor to evaluate you. That's why the $47 visit exists — so we're not guessing.\"",
+"obj_consult_script":"\"Of course — it's a family decision. How about we book a tentative spot and if you need to cancel, no problem? That way you don't lose the slot.\"",
+"obj_think_script":"\"Can I ask — what's the main thing giving you pause? [Listen.] That makes sense. Slots do fill up — what if I put you down tentatively and you let me know if you change your mind?\"",
+"obj_think_tip":"<strong>Pro tip:</strong> That question almost always reveals the real objection.",
+"div_exit":"❌ If They're NOT a Candidate","exit_title":"When We Can't Help","exit_sub":"Not every lead is a candidate — and that's okay",
+"exit_script":"\"I want to be honest with you — I'm not sure we're the best resource for what you need right now. I don't want to waste your time or money. I'd recommend [specialist/physician].\"",
+"exit_tip":"This honesty <strong>builds more long-term trust</strong> than forcing a sale. Many times they come back or send referrals.",
+"div_tracking":"📊 Daily Tracking",
+"track_leads":"Leads Received","track_calls":"Calls Made","track_booked":"Appointments Booked","track_showed":"Showed Up",
+"div_texts":"📱 Text Message Sequence","texts_title":"Text Sequence","texts_sub":"Use in order if they don't answer the call",
+"txt_lbl1":"Message 1 · Immediate",
+"txt1":"\"Hi! This is [Name] from CVC Spine & Sport 👋 I saw you were interested in shockwave therapy. Can you tell me a bit about your pain so I can see if we can help?\"",
+"txt_lbl2":"Message 2 · After positive response",
+"txt2":"\"Perfect — you sound like a great candidate. We have a discovery visit for $47. Does early or late in the week work better for you?\"",
+"txt_lbl3":"Message 3 · No response (24 hrs)",
+"txt3":"\"Hi! Just following up 🙏 Many people with pain like yours have had great results. Let me know if you'd like to reserve your visit.\"",
+"txt_lbl4":"Message 4 · Final (48–72 hrs)",
+"txt4":"\"Last message from me 🙏 We still have the $47 special available. If you're interested: [LINK]. Have a great day.\"",
+"txt_lbl5":"If they called us and we missed it",
+"txt5":"\"Hi! We saw that you called us 📞 Would you like info about shockwave therapy for your pain? I'm here to help.\"",
+"div_calendar":"📅 Book the Appointment","book_title":"Appointment Calendar","book_sub":"Discovery Visit · $47 · Evaluation + Initial Treatment",
+"book_pre_label":"Say this before opening the calendar",
+"book_pre_script":"\"Perfect — I'm going to reserve your spot right now. Can I get your full name and cell number for the confirmation?\"",
+"book_post_label":"✅ After booking — say this",
+"book_post_script":"\"All set — your spot is reserved. You'll get a text confirmation. If anything changes, please let me know ahead of time. See you soon!\"",
+"nav_prev":"← Back","nav_next":"Next →","nav_obj":"⚠️ Objection","nav_book":"📅 Book"
+}
+};
+
+let lang='es';
+const stepOrder=['step-1','step-2','step-3','step-4','step-5','step-obj','step-texts','step-book'];
+let currentStep=0;
+
+function applyLang(){
+  const d=T[lang];
+  document.title=d['page-title'];
+  document.getElementById('header-sub').textContent=d['header-sub'];
+  document.getElementById('reminder-text').innerHTML=d['reminder-text'];
+  document.querySelectorAll('.t[data-key]').forEach(el=>{
+    const k=el.getAttribute('data-key');
+    if(d[k]!==undefined) el.innerHTML=d[k];
+  });
+  document.querySelectorAll('.script-box[data-label-key]').forEach(el=>{
+    const k=el.getAttribute('data-label-key');
+    if(d[k]) el.setAttribute('data-label',d[k]);
+  });
+  const ql=document.getElementById('question-list');
+  ql.innerHTML='';
+  (d['questions']||[]).forEach((q,i)=>{
+    const li=document.createElement('li');
+    li.innerHTML=`<div class="q-num">${i+1}</div> ${q}`;
+    ql.appendChild(li);
+  });
+  const tabs=document.getElementById('obj-tabs-row');
+  tabs.innerHTML='';
+  (d['obj_tabs']||[]).forEach(([key,label],i)=>{
+    const btn=document.createElement('button');
+    btn.className='obj-tab'+(i===0?' selected':'');
+    btn.innerHTML=label;
+    btn.onclick=function(){showObj(key,this);};
+    tabs.appendChild(btn);
+  });
+  document.querySelectorAll('.obj-answer').forEach(el=>el.classList.remove('visible'));
+  const first=document.getElementById('obj-cost');
+  if(first) first.classList.add('visible');
+  document.getElementById('prevBtn').textContent=d['nav_prev'];
+  document.getElementById('nextBtn').textContent=d['nav_next'];
+  document.getElementById('btn-obj').textContent=d['nav_obj'];
+  document.getElementById('btn-book').textContent=d['nav_book'];
+  document.getElementById('btn-es').classList.toggle('active',lang==='es');
+  document.getElementById('btn-en').classList.toggle('active',lang==='en');
+  document.documentElement.lang=lang;
+}
+
+function setLang(l){lang=l;applyLang();}
+
+function buildDots(){
+  const c=document.getElementById('stepDots');
+  c.innerHTML='';
+  stepOrder.forEach((s,i)=>{
+    const d=document.createElement('div');
+    d.className='dot'+(i===0?' active':'');
+    d.id='dot-'+i;
+    c.appendChild(d);
+  });
+}
+
+function navigate(dir){
+  document.querySelectorAll('.card[data-step]').forEach(c=>c.classList.remove('active-card'));
+  currentStep=Math.max(0,Math.min(stepOrder.length-1,currentStep+dir));
+  stepOrder.forEach((id,i)=>{
+    const el=document.getElementById(id);
+    const dot=document.getElementById('dot-'+i);
+    if(!el||!dot) return;
+    if(i===currentStep){el.classList.add('active-card');dot.className='dot active';el.scrollIntoView({behavior:'smooth',block:'start'});}
+    else dot.className=i<currentStep?'dot done':'dot';
+  });
+  document.getElementById('prevBtn').disabled=currentStep===0;
+  document.getElementById('nextBtn').disabled=currentStep===stepOrder.length-1;
+  if(stepOrder[currentStep]==='step-book'){
+    const frame=document.getElementById('calendarFrame');
+    if(frame) frame.style.height=Math.max(680,window.innerHeight-280)+'px';
   }
+}
 
-  function navigate(dir) {
-    const cards = document.querySelectorAll('.card[data-step]');
-    cards.forEach(c => c.classList.remove('active-card','dimmed'));
+function jumpToObj(){currentStep=stepOrder.indexOf('step-obj');navigate(0);}
+function jumpToBook(){currentStep=stepOrder.indexOf('step-book');navigate(0);}
+function showObj(key,btn){
+  document.querySelectorAll('.obj-answer').forEach(el=>el.classList.remove('visible'));
+  document.querySelectorAll('.obj-tab').forEach(el=>el.classList.remove('selected'));
+  const ans=document.getElementById('obj-'+key);
+  if(ans) ans.classList.add('visible');
+  if(btn) btn.classList.add('selected');
+}
 
-    currentStep = Math.max(0, Math.min(stepOrder.length - 1, currentStep + dir));
-
-    stepOrder.forEach((id, i) => {
-      const el = document.getElementById(id);
-      const dot = document.getElementById('dot-' + i);
-      if (!el || !dot) return;
-      if (i === currentStep) {
-        el.classList.add('active-card');
-        dot.className = 'dot active';
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      } else if (i < currentStep) {
-        dot.className = 'dot done';
-      } else {
-        dot.className = 'dot';
-      }
-    });
-
-    document.getElementById('prevBtn').disabled = currentStep === 0;
-    document.getElementById('nextBtn').disabled = currentStep === stepOrder.length - 1;
-
-    // Resize calendar iframe when it becomes visible
-    if (stepOrder[currentStep] === 'step-book') {
-      const frame = document.getElementById('calendarFrame');
-      if (frame) {
-        frame.style.height = Math.max(680, window.innerHeight - 280) + 'px';
-      }
-    }
-  }
-
-  function jumpToObj() {
-    currentStep = stepOrder.indexOf('step-obj');
-    navigate(0);
-  }
-
-  function jumpToBook() {
-    currentStep = stepOrder.indexOf('step-book');
-    navigate(0);
-  }
-
-  function showObj(key, btn) {
-    document.querySelectorAll('.obj-answer').forEach(el => el.classList.remove('visible'));
-    document.querySelectorAll('.obj-tab').forEach(el => el.classList.remove('selected'));
-    document.getElementById('obj-' + key).classList.add('visible');
-    btn.classList.add('selected');
-  }
-
-  // Init
-  buildDots();
-  navigate(0);
+buildDots();
+applyLang();
+navigate(0);
 </script>
-
 </body>
 </html>
